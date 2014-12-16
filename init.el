@@ -8,5 +8,12 @@
 
 (require 'darcula-theme)
 
-(add-to-list 'default-frame-alist '(font .  "DejaVu Sans Mono-11" ))
-(set-frame-font   "DejaVu Sans Mono-11" nil t)
+(add-to-list 'default-frame-alist '(font .  "DejaVu Sans Mono-10.5" ))
+(set-frame-font   "DejaVu Sans Mono-10.5" nil t)
+
+
+;; indentation
+
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq indent-line-function 'insert-tab)
