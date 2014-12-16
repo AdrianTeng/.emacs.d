@@ -1,0 +1,9 @@
+
+# Complied files
+**/*.elc
+
+
+# ELPA metadata
+elpa/*.txt
+elpa/archives
+elpa/*.signed
