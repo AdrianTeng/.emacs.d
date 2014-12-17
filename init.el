@@ -9,7 +9,7 @@
 (require 'darcula-theme)
 
 (add-to-list 'default-frame-alist '(font .  "DejaVu Sans Mono-10.5" ))
-(set-frame-font   "DejaVu Sans Mono-10.5" nil t)
+(set-frame-font   "DejaVu LGC Sans Mono-10.5" nil t)
 
 
 ;; indentation
@@ -19,3 +19,9 @@
 (setq indent-line-function 'insert-tab)
 
 (add-to-list 'load-path "~/.emacs.d/elpa/magit-20141214.1225")
+
+
+(add-hook 'prog-mode-hook 'electric-pair-mode)
+(add-hook 'prog-mode-hook 'company-mode)
+
+(global-set-key (kbd "C-SPC") 'company-complete)
