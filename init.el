@@ -58,3 +58,22 @@
 ;; git
 
 (global-set-key (kbd "C-c g") 'magit-status)
+
+
+;;-----------------------------------------------------------------------------
+;; Program language specifc
+;;-----------------------------------------------------------------------------
+
+;; emacs-lisp
+(require 'rainbow-delimiters)
+(add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
+(set-face-foreground 'rainbow-delimiters-depth-1-face "white")
+(set-face-foreground 'rainbow-delimiters-depth-2-face "cyan")
+(set-face-foreground 'rainbow-delimiters-depth-3-face "yellow")
+(set-face-foreground 'rainbow-delimiters-depth-4-face "green")
+(set-face-foreground 'rainbow-delimiters-depth-5-face "orange")
+(set-face-foreground 'rainbow-delimiters-depth-6-face "purple")
+(set-face-foreground 'rainbow-delimiters-depth-7-face "white")
+(set-face-foreground 'rainbow-delimiters-depth-8-face "cyan")
+(set-face-foreground 'rainbow-delimiters-depth-9-face "yellow")
+(set-face-foreground 'rainbow-delimiters-unmatched-face "red")
