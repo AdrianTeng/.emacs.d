@@ -2,6 +2,10 @@
 # Complied files
 **/*.elc
 
+# Emacs temp file
+*~
+[#]*[#]
+.\#*
 
 # ELPA metadata
 elpa/*.txt
