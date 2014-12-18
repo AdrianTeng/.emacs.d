@@ -6,6 +6,8 @@
 *~
 [#]*[#]
 .\#*
+auto-save
+backups
 
 # ELPA metadata
 elpa/*.txt

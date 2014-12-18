@@ -8,6 +8,10 @@
 
 (global-set-key (kbd "<f12>") (lambda() (interactive)(load-file "~/.emacs.d/init.el")))
 
+;; Save and reload all buffers when emacs exit and start
+
+(desktop-save-mode 1)
+
 
 ;; UI related
 
@@ -25,6 +29,10 @@
 (setq-default tab-width 4)
 (setq indent-line-function 'insert-tab)
 
+;; Auto indent when insert new line
+(add-hook 'prog-mode-hook '(lambda ()
+  (local-set-key (kbd "RET") 'newline-and-indent)))
+
 (add-to-list 'load-path "~/.emacs.d/elpa/magit-20141214.1225")
 
 
@@ -34,7 +42,9 @@
 (add-hook 'prog-mode-hook 'company-mode)
 (global-set-key (kbd "M-SPC") 'company-complete)
 
-
+;;------------------------------------------------------------------------------
+;; File I/O
+;;------------------------------------------------------------------------------
 ;; Recently opened files
 
 (require 'recentf)
@@ -54,6 +64,21 @@
 
 (global-set-key (kbd "C-x C-r") 'ido-recentf-open)
 
+;; Kill all buffers except the one you are opening
+(defun kill-other-buffers ()
+      "Kill all other buffers."
+      (interactive)
+      (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
+
+    
+;; Autosave and back file to be stored centrally
+(setq backup-directory-alist
+      `(("." . ,(expand-file-name
+                 (concat user-emacs-directory "backups")))))
+
+(setq auto-save-file-name-transforms
+          `((".*" ,(expand-file-name
+                    (concat user-emacs-directory "auto-save")) t)))
 
 ;; git
 
