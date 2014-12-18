@@ -60,6 +60,29 @@
 (global-set-key (kbd "C-c g") 'magit-status)
 
 
+;; Cursor moving
+
+(require 'highlight-symbol)
+
+(global-set-key (kbd "M-n") 'highlight-symbol-next)
+(global-set-key (kbd "M-p") 'highlight-symbol-prev)
+
+(defun highlight-symbol-first ()
+  "Jump to the first location of symbol at point."
+  (interactive)
+  (push-mark)
+  (eval
+   `(progn
+      (goto-char (point-min))
+      (search-forward-regexp
+       (rx symbol-start ,(thing-at-point 'symbol) symbol-end)
+       nil t)
+      (beginning-of-thing 'symbol))))
+
+(global-set-key (kbd "<f3>") 'highlight-symbol-first) ;; Clearly I used to use eclipse
+
+
+
 ;;-----------------------------------------------------------------------------
 ;; Program language specifc
 ;;-----------------------------------------------------------------------------
