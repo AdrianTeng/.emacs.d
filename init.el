@@ -1,5 +1,6 @@
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 (package-initialize)
 
@@ -106,6 +107,12 @@
 
 (global-set-key (kbd "<f3>") 'highlight-symbol-first) ;; Clearly I used to use eclipse
 
+;;-----------------------------------------------------------------------------
+;; Generic Prog mode
+;;-----------------------------------------------------------------------------
+
+;; Always enable flycheck
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 
 ;;-----------------------------------------------------------------------------
@@ -125,3 +132,7 @@
 (set-face-foreground 'rainbow-delimiters-depth-8-face "cyan")
 (set-face-foreground 'rainbow-delimiters-depth-9-face "yellow")
 (set-face-foreground 'rainbow-delimiters-unmatched-face "red")
+
+
+(provide 'init)
+;;; init.el ends here
