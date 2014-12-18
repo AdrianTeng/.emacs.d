@@ -39,7 +39,6 @@
 
 ;; Autocomplete
 
-(add-hook 'prog-mode-hook 'electric-pair-mode)
 (add-hook 'prog-mode-hook 'company-mode)
 (global-set-key (kbd "M-SPC") 'company-complete)
 
