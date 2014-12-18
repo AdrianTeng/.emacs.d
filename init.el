@@ -111,11 +111,11 @@
 ;;-----------------------------------------------------------------------------
 
 ;; Always enable flycheck
-(add-hook 'after-init-hook #'global-flycheck-mode)
+(add-hook 'after-init-hook 'global-flycheck-mode)
 
 ;; Delimiter highlight
 (show-smartparens-global-mode +1)
-
+(smartparens-global-mode t)
 
 ;;-----------------------------------------------------------------------------
 ;; Program language specifc
