@@ -13,8 +13,9 @@
 
 (desktop-save-mode 1)
 
-
+;;------------------------------------------------------------------------------
 ;; UI related
+;;------------------------------------------------------------------------------
 
 (add-to-list 'load-path "~/.emacs.d/elpa/darcula-theme-20141211.128")
 
@@ -22,6 +23,9 @@
 
 (add-to-list 'default-frame-alist '(font .  "DejaVu Sans Mono-10.5" ))
 (set-frame-font   "DejaVu Sans Mono-10.5" nil t)
+
+;; Disable toolbar
+(tool-bar-mode 0)
 
 
 ;; indentation
@@ -33,14 +37,6 @@
 ;; Auto indent when insert new line
 (add-hook 'prog-mode-hook '(lambda ()
   (local-set-key (kbd "RET") 'newline-and-indent)))
-
-(add-to-list 'load-path "~/.emacs.d/elpa/magit-20141214.1225")
-
-
-;; Autocomplete
-
-(add-hook 'prog-mode-hook 'company-mode)
-(global-set-key (kbd "M-SPC") 'company-complete)
 
 ;;------------------------------------------------------------------------------
 ;; File I/O
@@ -89,11 +85,11 @@
         (ido-case-fold t))
     ad-do-it))    
 
-(global-set-key (kbd "C-R") 'find-file-in-repository) 
+(global-set-key (kbd "C-S-r") 'find-file-in-repository) 
 
 ;; git
 
-(global-set-key (kbd "hC-c g") 'magit-status)
+(global-set-key (kbd "C-c g") 'magit-status)
 
 ;;------------------------------------------------------------------------------
 ;; Cursor moving
@@ -134,14 +130,17 @@ the start of the line."
 (global-set-key (kbd "C-a") 'beginning-of-line-dwim)
 
 
-(require 'jump-char)
-
-(global-set-key [(meta m)] 'jump-char-forward)
-(global-set-key [(shift meta m)] 'jump-char-backward)
+;; Jump!
+(global-set-key (kbd "C-c SPC") 'ace-jump-mode)
 
 ;;-----------------------------------------------------------------------------
 ;; Generic Prog mode
 ;;-----------------------------------------------------------------------------
+
+;; Autocomplete
+
+(add-hook 'prog-mode-hook 'company-mode)
+(global-set-key (kbd "M-SPC") 'company-complete)
 
 ;; Always enable flycheck
 (add-hook 'after-init-hook 'global-flycheck-mode)
@@ -171,8 +170,8 @@ the start of the line."
 
 ;; javascript
 
-(add-hook 'js-mode-hook 'js2-minor-mode)
-(add-hook 'js2-mode-hook 'ac-js2-mode)
+(require 'js2-mode)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
 
 (provide 'init)
