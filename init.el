@@ -80,12 +80,24 @@
           `((".*" ,(expand-file-name
                     (concat user-emacs-directory "auto-save")) t)))
 
+;; Open files in same repo
+
+(require 'find-file-in-repository)
+
+(defadvice find-file-in-repository (around disable-ido-flex-matching activate)
+  (let ((ido-enable-flex-matching nil)
+        (ido-case-fold t))
+    ad-do-it))    
+
+(global-set-key (kbd "C-R") 'find-file-in-repository) 
+
 ;; git
 
-(global-set-key (kbd "C-c g") 'magit-status)
+(global-set-key (kbd "hC-c g") 'magit-status)
 
-
+;;------------------------------------------------------------------------------
 ;; Cursor moving
+;;------------------------------------------------------------------------------
 
 (require 'highlight-symbol)
 
@@ -105,6 +117,27 @@
       (beginning-of-thing 'symbol))))
 
 (global-set-key (kbd "<f3>") 'highlight-symbol-first) ;; Clearly I used to use eclipse
+
+(defun beginning-of-line-dwim ()
+  "Toggles between moving point to the first non-whitespace character, and
+the start of the line."
+  (interactive)
+  (let ((start-position (point)))
+    ;; see if going to the beginning of the line changes our position
+    (move-beginning-of-line nil)
+
+    (when (= (point) start-position)
+        ;; we're already at the beginning of the line, so go to the
+        ;; first non-whitespace character
+        (back-to-indentation))))
+
+(global-set-key (kbd "C-a") 'beginning-of-line-dwim)
+
+
+(require 'jump-char)
+
+(global-set-key [(meta m)] 'jump-char-forward)
+(global-set-key [(shift meta m)] 'jump-char-backward)
 
 ;;-----------------------------------------------------------------------------
 ;; Generic Prog mode
