@@ -35,8 +35,11 @@
 (setq indent-line-function 'insert-tab)
 
 ;; Auto indent when insert new line
-(add-hook 'prog-mode-hook '(lambda ()
-  (local-set-key (kbd "RET") 'newline-and-indent)))
+(require 'auto-indent-mode)
+(auto-indent-global-mode)
+(setq auto-indent-disabled-modes-list (append '(shell-mode) auto-indent-disabled-modes-list))
+(add-hook 'before-save-hook 'whitespace-cleanup)
+
 
 ;;------------------------------------------------------------------------------
 ;; File I/O
@@ -52,7 +55,7 @@
 (setq recentf-max-saved-items 200)
 
 (defun ido-recentf-open ()
-  "Use `ido-completing-read' to \\[find-file] a recent file"
+  "Use `ido-completing  -read' to \\[find-file] a recent file"
   (interactive)
   (if (find-file (ido-completing-read "Find recent file: " recentf-list))
       (message "Opening file...")
@@ -66,7 +69,7 @@
       (interactive)
       (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
 
-    
+
 ;; Autosave and back file to be stored centrally
 (setq backup-directory-alist
       `(("." . ,(expand-file-name
@@ -83,9 +86,9 @@
 (defadvice find-file-in-repository (around disable-ido-flex-matching activate)
   (let ((ido-enable-flex-matching nil)
         (ido-case-fold t))
-    ad-do-it))    
+    ad-do-it))
 
-(global-set-key (kbd "C-S-r") 'find-file-in-repository) 
+(global-set-key (kbd "C-S-r") 'find-file-in-repository)
 
 ;; git
 
@@ -148,6 +151,7 @@ the start of the line."
 ;; Delimiter highlight
 (show-smartparens-global-mode +1)
 (smartparens-global-mode t)
+(set-variable 'sp-autoescape-string-quote nil)
 
 ;;-----------------------------------------------------------------------------
 ;; Program language specifc
@@ -176,4 +180,3 @@ the start of the line."
 
 (provide 'init)
 ;;; init.el ends here
-
