@@ -9,7 +9,7 @@
 
 (global-set-key (kbd "<f12>") (lambda() (interactive)(load-file "~/.emacs.d/init.el")))
 
-;; Save and reload all buffers when emacs exit and start
+;; Save and reload all buffers when Emacs exit and start
 
 (desktop-save-mode 1)
 
@@ -34,10 +34,10 @@
 (setq-default tab-width 4)
 (setq indent-line-function 'insert-tab)
 
-;; Auto indent when insert new line
-(require 'auto-indent-mode)
-(auto-indent-global-mode)
-(setq auto-indent-disabled-modes-list (append '(shell-mode) auto-indent-disabled-modes-list))
+(defun indent-buffer ()
+  "Indent the everything in the current buffer."
+  (interactive)
+  (indent-region (point-min) (point-max)))
 (add-hook 'before-save-hook 'whitespace-cleanup)
 
 
@@ -65,9 +65,9 @@
 
 ;; Kill all buffers except the one you are opening
 (defun kill-other-buffers ()
-      "Kill all other buffers."
-      (interactive)
-      (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
+  "Kill all other buffers."
+  (interactive)
+  (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
 
 
 ;; Autosave and back file to be stored centrally
@@ -76,17 +76,12 @@
                  (concat user-emacs-directory "backups")))))
 
 (setq auto-save-file-name-transforms
-          `((".*" ,(expand-file-name
-                    (concat user-emacs-directory "auto-save")) t)))
+      `((".*" ,(expand-file-name
+                (concat user-emacs-directory "auto-save")) t)))
 
 ;; Open files in same repo
 
 (require 'find-file-in-repository)
-
-(defadvice find-file-in-repository (around disable-ido-flex-matching activate)
-  (let ((ido-enable-flex-matching nil)
-        (ido-case-fold t))
-    ad-do-it))
 
 (global-set-key (kbd "C-S-r") 'find-file-in-repository)
 
@@ -119,19 +114,18 @@
 
 (defun beginning-of-line-dwim ()
   "Toggles between moving point to the first non-whitespace character, and
-the start of the line."
+    the start of the line."
   (interactive)
   (let ((start-position (point)))
     ;; see if going to the beginning of the line changes our position
     (move-beginning-of-line nil)
 
     (when (= (point) start-position)
-        ;; we're already at the beginning of the line, so go to the
-        ;; first non-whitespace character
-        (back-to-indentation))))
+      ;; we're already at the beginning of the line, so go to the
+      ;; first non-whitespace character
+      (back-to-indentation))))
 
 (global-set-key (kbd "C-a") 'beginning-of-line-dwim)
-
 
 ;; Jump!
 (global-set-key (kbd "C-c SPC") 'ace-jump-mode)
@@ -176,6 +170,12 @@ the start of the line."
 
 (require 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+
+;; python
+(require 'company-anaconda)
+(add-to-list 'company-backends 'company-anaconda)
+(add-hook 'python-mode-hook 'anaconda-mode)
+(add-hook 'python-mode-hook 'eldoc-mode)
 
 
 (provide 'init)
