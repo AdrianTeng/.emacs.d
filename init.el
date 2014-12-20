@@ -22,7 +22,7 @@
 (require 'darcula-theme)
 
 (add-to-list 'default-frame-alist '(font .  "DejaVu Sans Mono-10.5" ))
-(set-frame-font   "DejaVu Sans Mono-10.5" nil t)
+(set-frame-font "DejaVu Sans Mono-10.5" nil t)
 
 ;; Disable toolbar
 (tool-bar-mode 0)
@@ -176,6 +176,8 @@
 (add-to-list 'company-backends 'company-anaconda)
 (add-hook 'python-mode-hook 'anaconda-mode)
 (add-hook 'python-mode-hook 'eldoc-mode)
+(add-hook 'python-mode-hook '(lambda ()
+                               (setq python-indent 4)))
 
 
 (provide 'init)
