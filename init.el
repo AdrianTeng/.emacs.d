@@ -9,9 +9,6 @@
 
 (global-set-key (kbd "<f12>") (lambda() (interactive)(load-file "~/.emacs.d/init.el")))
 
-;; Save and reload all buffers when Emacs exit and start
-
-(desktop-save-mode 1)
 
 ;;------------------------------------------------------------------------------
 ;; UI related
@@ -27,9 +24,10 @@
 ;; Disable toolbar
 (tool-bar-mode 0)
 
-
-;; indentation
-
+;;------------------------------------------------------------------------------
+;; Editing
+;;------------------------------------------------------------------------------
+;; Indentation
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 (setq indent-line-function 'insert-tab)
@@ -39,6 +37,14 @@
   (interactive)
   (indent-region (point-min) (point-max)))
 (add-hook 'before-save-hook 'whitespace-cleanup)
+
+;; overwrite when text is selected
+(delete-selection-mode t)
+
+;; spell checking
+;; TODO: Fix dictionary path
+(add-hook 'text-mode-hook 'flyspell-mode)
+(add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
 
 ;;------------------------------------------------------------------------------
@@ -178,6 +184,11 @@
 (add-hook 'python-mode-hook 'eldoc-mode)
 (add-hook 'python-mode-hook '(lambda ()
                                (setq python-indent 4)))
+;; TODO: Use executable-find to defun ipython
+
+;; Markdown
+(require 'markdown-mode)
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 
 (provide 'init)
