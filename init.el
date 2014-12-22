@@ -25,6 +25,14 @@
 (tool-bar-mode 0)
 
 ;;------------------------------------------------------------------------------
+;; Emacs command line interaction
+;;------------------------------------------------------------------------------
+
+;; Smex provides fuzzy completion with M-x command calling
+(smex-initialize)
+(global-set-key (kbd "M-x") 'smex)
+
+;;------------------------------------------------------------------------------
 ;; Editing
 ;;------------------------------------------------------------------------------
 ;; Indentation
@@ -36,7 +44,11 @@
   "Indent the everything in the current buffer."
   (interactive)
   (indent-region (point-min) (point-max)))
+
 (add-hook 'before-save-hook 'whitespace-cleanup)
+
+;; line breaking
+(setq fill-column '110)
 
 ;; overwrite when text is selected
 (delete-selection-mode t)
@@ -91,6 +103,9 @@
 
 (global-set-key (kbd "C-S-r") 'find-file-in-repository)
 
+;; Reload from disk
+(global-set-key (kbd "<f5>") 'revert-buffer)
+
 ;; git
 
 (global-set-key (kbd "C-c g") 'magit-status)
@@ -142,6 +157,7 @@
 
 ;; Autocomplete
 
+(require 'company)
 (add-hook 'prog-mode-hook 'company-mode)
 (global-set-key (kbd "M-SPC") 'company-complete)
 
@@ -174,8 +190,11 @@
 
 ;; javascript
 
+;; TODO: javascript auto-completion in js2-mode is not case sensitive
 (require 'js2-mode)
+(require 'company-dabbrev-code)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(add-to-list 'company-dabbrev-code-modes 'js2-mode)
 
 ;; python
 (require 'company-anaconda)
