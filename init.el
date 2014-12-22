@@ -31,6 +31,7 @@
 ;; Smex provides fuzzy completion with M-x command calling
 (smex-initialize)
 (global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
 ;;------------------------------------------------------------------------------
 ;; Editing
