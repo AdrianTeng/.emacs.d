@@ -33,6 +33,8 @@
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
+;; TODO: Smex for buffer selection (C-x b)?
+
 ;;------------------------------------------------------------------------------
 ;; Editing
 ;;------------------------------------------------------------------------------
@@ -167,9 +169,24 @@
 (add-hook 'after-init-hook 'global-flycheck-mode)
 
 ;; Delimiter highlight
+(require 'smartparens)
 (show-smartparens-global-mode +1)
 (smartparens-global-mode t)
 (set-variable 'sp-autoescape-string-quote nil)
+
+;; (foo bar) -> foo bar
+(define-key smartparens-mode-map (kbd "M-s") 'sp-splice-sexp)
+
+;; (foo bar) -> [foo bar]
+(define-key smartparens-mode-map (kbd "M-S") 'sp-rewrap-sexp)
+
+;; (foo) bar -> (foo bar)
+(define-key smartparens-mode-map (kbd "<C-right>") 'sp-slurp-hybrid-sexp)
+
+
+;; Vertical line indicator of exceeding line length of 110
+(require 'column-marker)
+(add-hook 'prog-mode-hook (lambda () (interactive) column-marker-1 111))
 
 ;; TODO: Begin new line with comment character if new line is inserted in comment block
 
@@ -213,7 +230,7 @@
 ;;        (call-process ipython))
 ;;)
 
-;; TODO: execute line in python buffer
+;; TODO: execute line in python buffer - python-shell-send-region
 (setq-default flycheck-flake8-maximum-line-length 110)
 
 ;; Markdown
