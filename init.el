@@ -49,7 +49,7 @@
 (add-hook 'before-save-hook 'whitespace-cleanup)
 
 ;; line breaking
-(setq fill-column '110)
+(setq-default fill-column '110)
 
 ;; overwrite when text is selected
 (delete-selection-mode t)
@@ -163,6 +163,7 @@
 (global-set-key (kbd "M-SPC") 'company-complete)
 
 ;; Always enable flycheck
+(require 'flycheck)
 (add-hook 'after-init-hook 'global-flycheck-mode)
 
 ;; Delimiter highlight
@@ -213,7 +214,7 @@
 ;;)
 
 ;; TODO: execute line in python buffer
-;; TODO: pep8 line length 110 ]chars
+(setq-default flycheck-flake8-maximum-line-length 110)
 
 ;; Markdown
 (require 'markdown-mode)
