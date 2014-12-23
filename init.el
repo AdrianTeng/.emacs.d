@@ -170,6 +170,8 @@
 (smartparens-global-mode t)
 (set-variable 'sp-autoescape-string-quote nil)
 
+;; TODO: Begin new line with comment character if new line is inserted in comment block
+
 ;;-----------------------------------------------------------------------------
 ;; Program language specifc
 ;;-----------------------------------------------------------------------------
@@ -205,10 +207,19 @@
 (add-hook 'python-mode-hook '(lambda ()
                                (setq python-indent 4)))
 ;; TODO: Use executable-find to defun ipython
+;;(defun ipython()
+;;    (let (ipython (executable-find "ipython"))
+;;        (call-process ipython))
+;;)
+
+;; TODO: execute line in python buffer
+;; TODO: pep8 line length 110 ]chars
 
 ;; Markdown
 (require 'markdown-mode)
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . gfm-mode))
+(custom-set-variables
+ '(markdown-command "/usr/bin/pandoc"))
 
 
 (provide 'init)
