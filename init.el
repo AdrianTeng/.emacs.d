@@ -57,10 +57,10 @@
 (delete-selection-mode t)
 
 ;; spell checking
-;; TODO: Fix dictionary path
 (add-hook 'text-mode-hook 'flyspell-mode)
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
+;; TODO: C-backspace to delete only up to end of string (i.e. less aggressive delete)
 
 ;;------------------------------------------------------------------------------
 ;; File I/O
@@ -181,7 +181,7 @@
 (define-key smartparens-mode-map (kbd "M-S") 'sp-rewrap-sexp)
 
 ;; (foo) bar -> (foo bar)
-(define-key smartparens-mode-map (kbd "<C-right>") 'sp-slurp-hybrid-sexp)
+(define-key smartparens-mode-map (kbd "<C-M-right>") 'sp-slurp-hybrid-sexp)
 
 
 ;; Vertical line indicator of exceeding line length of 110
@@ -216,6 +216,9 @@
 (require 'company-dabbrev-code)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-to-list 'company-dabbrev-code-modes 'js2-mode)
+
+;; html
+(add-to-list 'company-dabbrev-code-modes 'html-mode)
 
 ;; python
 (require 'company-anaconda)
