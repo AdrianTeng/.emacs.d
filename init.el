@@ -1,9 +1,10 @@
+(add-to-list 'load-path "~/.emacs.d/user-lisp/")
+
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 
-(add-to-list 'load-path "~/.emacs.d/user-lisp/")
 
 (package-initialize)
 
@@ -62,6 +63,9 @@
 ;; spell checking
 (add-hook 'text-mode-hook 'flyspell-mode)
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+
+;; Who uses C-z to minimise Emacs anyway?
+(global-set-key (kbd "C-z") 'undo)
 
 ;; TODO: C-backspace to delete only up to end of string (i.e. less aggressive delete)
 
@@ -196,6 +200,8 @@
 ;;-----------------------------------------------------------------------------
 ;; Program language specifc
 ;;-----------------------------------------------------------------------------
+
+(require 'python-customisations)
 
 ;; emacs-lisp
 (require 'rainbow-delimiters)
