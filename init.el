@@ -2,6 +2,9 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 
+
+(add-to-list 'load-path "~/.emacs.d/user-lisp/")
+
 (package-initialize)
 
 
@@ -220,18 +223,6 @@
 ;; html
 (add-to-list 'company-dabbrev-code-modes 'html-mode)
 
-;; python
-(require 'company-anaconda)
-(add-to-list 'company-backends 'company-anaconda)
-(add-hook 'python-mode-hook 'anaconda-mode)
-(add-hook 'python-mode-hook 'eldoc-mode)
-(add-hook 'python-mode-hook '(lambda ()
-                               (setq python-indent 4)))
-;; TODO: Use executable-find to defun ipython
-;;(defun ipython()
-;;    (let (ipython (executable-find "ipython"))
-;;        (call-process ipython))
-;;)
 
 ;; TODO: execute line in python buffer - python-shell-send-region
 (setq-default flycheck-flake8-maximum-line-length 110)
