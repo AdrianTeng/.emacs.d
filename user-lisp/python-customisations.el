@@ -4,6 +4,9 @@
 ;;
 
 ;;; Code:
+
+;; I use company mode for code completion ui across the board, with anacoda
+;; providing the suggestions at back end
 (require 'company-anaconda)
 (add-to-list 'company-backends 'company-anaconda)
 (add-hook 'python-mode-hook 'anaconda-mode)
@@ -11,6 +14,7 @@
 (add-hook 'python-mode-hook '(lambda ()
                                (setq python-indent 4)))
 
+;; Use IPython as the default python interpreter, if available
 (when (executable-find "ipython")
   (setq
    python-shell-interpreter "ipython"
@@ -26,6 +30,6 @@
 
 (defalias 'ipython 'run-python)
 
-(message "hello world!")
+
 (provide 'python-customisations)
 ;;; python-customisations.el ends here

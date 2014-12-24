@@ -69,6 +69,20 @@
 
 ;; TODO: C-backspace to delete only up to end of string (i.e. less aggressive delete)
 
+(defun delete-word (arg)
+  "Delete characters forward until encountering the end of a word.
+With argument, do this that many times."
+  (interactive "p")
+  (delete-region (point) (progn (forward-word arg) (point))))
+
+(defun backward-delete-word (arg)
+  "Delete characters backward until encountering the end of a word.
+With argument, do this that many times."
+  (interactive "p")
+  (delete-word (- arg)))
+
+(global-set-key (kbd "<C-backspace>") 'backward-delete-word)
+
 ;;------------------------------------------------------------------------------
 ;; File I/O
 ;;------------------------------------------------------------------------------
@@ -202,6 +216,7 @@
 ;;-----------------------------------------------------------------------------
 
 (require 'python-customisations)
+(require 'javascript-customisations)
 
 ;; emacs-lisp
 (require 'rainbow-delimiters)
@@ -217,15 +232,6 @@
 (set-face-foreground 'rainbow-delimiters-depth-9-face "yellow")
 (set-face-foreground 'rainbow-delimiters-unmatched-face "red")
 
-
-;; javascript
-
-;; TODO: javascript auto-completion in js2-mode is not case sensitive
-(require 'js2-mode)
-(require 'company-dabbrev-code)
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-(add-to-list 'company-dabbrev-code-modes 'js2-mode)
-
 ;; html
 (add-to-list 'company-dabbrev-code-modes 'html-mode)
 
@@ -237,6 +243,10 @@
 (require 'markdown-mode)
 (add-to-list 'auto-mode-alist '("\\.md\\'" . gfm-mode))
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(markdown-command "/usr/bin/pandoc"))
 
 
