@@ -81,7 +81,25 @@ With argument, do this that many times."
   (interactive "p")
   (delete-word (- arg)))
 
+;; If I want stuff to get into kill-ring, I'll mark-region -> kill-region,
+;; rather than using C-delete | C-backspace
+(global-set-key (kbd "<C-delete>") 'delete-word)
 (global-set-key (kbd "<C-backspace>") 'backward-delete-word)
+
+
+(defun comment-or-uncomment-region-or-line ()
+    "Comments or uncomments the region or the current line if there's no active region."
+    (interactive)
+    (let (beg end)
+        (if (region-active-p)
+            (setq beg (region-beginning) end (region-end))
+            (setq beg (line-beginning-position) end (line-end-position)))
+        (comment-or-uncomment-region beg end)
+        (next-line)))
+
+;; A very common default key-binding in modern IDE. I suppose with this, Emacs
+;; is a 'modern IDE' too ;)
+(global-set-key (kbd "C-/") 'comment-or-uncomment-region-or-line)
 
 ;;------------------------------------------------------------------------------
 ;; File I/O
