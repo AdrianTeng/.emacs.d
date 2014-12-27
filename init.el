@@ -1,3 +1,14 @@
+;;; init.el
+;;
+;;; Commentary:
+;; The following external applications are being used:
+;; jshint - by flycheck in js2-mode (javascript)
+;; git - by magit
+;; pandoc - for markdown-preview in markdown-mode (markdown)
+
+;;; Code:
+
+
 (add-to-list 'load-path "~/.emacs.d/user-lisp/")
 
 (require 'package)
@@ -19,6 +30,7 @@
 ;;------------------------------------------------------------------------------
 
 (add-to-list 'load-path "~/.emacs.d/elpa/darcula-theme-20141211.128")
+
 
 (require 'darcula-theme)
 
@@ -45,6 +57,7 @@
 ;; Indentation
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
+(defvaralias 'c-basic-offset 'tab-width)
 (setq indent-line-function 'insert-tab)
 
 (defun indent-buffer ()
@@ -67,7 +80,7 @@
 ;; Who uses C-z to minimise Emacs anyway?
 (global-set-key (kbd "C-z") 'undo)
 
-;; TODO: C-backspace to delete only up to end of string (i.e. less aggressive delete)
+;; TODO: make backward-delete-word to delete up to end of previous word
 
 (defun delete-word (arg)
   "Delete characters forward until encountering the end of a word.
@@ -141,9 +154,9 @@ With argument, do this that many times."
 
 ;; Open files in same repo
 
-(require 'find-file-in-repository)
+(require 'find-file-in-project)
 
-(global-set-key (kbd "C-S-r") 'find-file-in-repository)
+(global-set-key (kbd "C-S-r") 'find-file-in-project)
 
 ;; Reload from disk
 (global-set-key (kbd "<f5>") 'revert-buffer)
@@ -229,6 +242,9 @@ With argument, do this that many times."
 
 ;; TODO: Begin new line with comment character if new line is inserted in comment block
 
+(require 'yasnippet)
+(yas-global-mode 1)
+
 ;;-----------------------------------------------------------------------------
 ;; Program language specifc
 ;;-----------------------------------------------------------------------------
@@ -253,9 +269,8 @@ With argument, do this that many times."
 ;; html
 (add-to-list 'company-dabbrev-code-modes 'html-mode)
 
-
-;; TODO: execute line in python buffer - python-shell-send-region
-(setq-default flycheck-flake8-maximum-line-length 110)
+;; Java
+(add-hook 'java-mode-hook 'subword-mode)
 
 ;; Markdown
 (require 'markdown-mode)

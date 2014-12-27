@@ -30,6 +30,8 @@
 
 (defalias 'ipython 'run-python)
 
+;; TODO: execute line in python buffer - python-shell-send-region
+(setq-default flycheck-flake8-maximum-line-length 110)
 
 (provide 'python-customisations)
 ;;; python-customisations.el ends here
