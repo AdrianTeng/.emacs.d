@@ -114,6 +114,7 @@ With argument, do this that many times."
 ;; is a 'modern IDE' too ;)
 (global-set-key (kbd "C-/") 'comment-or-uncomment-region-or-line)
 
+
 ;;------------------------------------------------------------------------------
 ;; File I/O
 ;;------------------------------------------------------------------------------
@@ -145,7 +146,7 @@ With argument, do this that many times."
 
 ;; Autosave and back file to be stored centrally
 (setq backup-directory-alist
-      `(("." . ,(expand-file-name
+      `((".*" . ,(expand-file-name
                  (concat user-emacs-directory "backups")))))
 
 (setq auto-save-file-name-transforms
@@ -213,8 +214,12 @@ With argument, do this that many times."
 ;; Autocomplete
 
 (require 'company)
+(add-hook 'text-mode-hook 'company-mode)
 (add-hook 'prog-mode-hook 'company-mode)
 (global-set-key (kbd "M-SPC") 'company-complete)
+(setq-default company-dabbrev-downcase nil)
+
+;; TODO: auto complete file dir
 
 ;; Always enable flycheck
 (require 'flycheck)
@@ -275,12 +280,10 @@ With argument, do this that many times."
 ;; Markdown
 (require 'markdown-mode)
 (add-to-list 'auto-mode-alist '("\\.md\\'" . gfm-mode))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(markdown-command "/usr/bin/pandoc"))
+
+(if (executable-find "pandoc")
+    (setq-default
+     '(markdown-command (executable-find "pandoc"))))
 
 
 (provide 'init)
