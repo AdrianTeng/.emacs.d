@@ -49,7 +49,9 @@
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
-;; TODO: Smex for buffer selection (C-x b)?
+;; fuzzy completion for a bunch of commands. switch-to-buffer, for example.
+(require 'ido)
+(ido-mode t)
 
 ;;------------------------------------------------------------------------------
 ;; Editing
