@@ -101,6 +101,7 @@ With argument, do this that many times."
 (global-set-key (kbd "<C-delete>") 'delete-word)
 (global-set-key (kbd "<C-backspace>") 'backward-delete-word)
 
+;; TODO: Write subword-delete
 
 (defun comment-or-uncomment-region-or-line ()
     "Comments or uncomments the region or the current line if there's no active region."
@@ -207,7 +208,12 @@ With argument, do this that many times."
 (global-set-key (kbd "C-a") 'beginning-of-line-dwim)
 
 ;; Jump!
+(require 'ace-jump-mode)
 (global-set-key (kbd "C-c SPC") 'ace-jump-mode)
+(setq ace-jump-mode-submode-list
+      '(ace-jump-char-mode
+        ace-jump-word-mode
+        ace-jump-line-mode) )
 
 ;;-----------------------------------------------------------------------------
 ;; Generic Prog mode
