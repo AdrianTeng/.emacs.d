@@ -169,6 +169,9 @@ With argument, do this that many times."
 ;; Reload from disk
 (global-set-key (kbd "<f5>") 'revert-buffer)
 
+;; Lock files makes grunt go nuts
+(setq create-lockfiles nil)
+
 ;; git
 
 (global-set-key (kbd "C-c g") 'magit-status)
@@ -218,6 +221,8 @@ With argument, do this that many times."
       '(ace-jump-char-mode
         ace-jump-word-mode
         ace-jump-line-mode) )
+
+(global-set-key (kbd "M-l") 'goto-line)
 
 ;;-----------------------------------------------------------------------------
 ;; Generic Prog mode
@@ -285,6 +290,8 @@ With argument, do this that many times."
 
 ;; html
 (add-to-list 'company-dabbrev-code-modes 'html-mode)
+;; less
+(add-to-list 'company-dabbrev-code-modes 'less-css-mode)
 
 ;; Java
 (add-hook 'java-mode-hook 'subword-mode)
