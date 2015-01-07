@@ -5,6 +5,7 @@
 ;; jshint - by flycheck in js2-mode (javascript)
 ;; git - by magit
 ;; pandoc - for markdown-preview in markdown-mode (markdown)
+;; ag - Silver Searcher - Replacement of rgrep (See https://github.com/ggreer/the_silver_searcher)
 
 ;;; Code:
 
@@ -55,7 +56,7 @@
 
 
 ;; Tracking command usage
-(keyfreq-mode)
+;;(keyfreq-mode) TODO: FIX
 
 ;;------------------------------------------------------------------------------
 ;; Editing
@@ -168,6 +169,10 @@ With argument, do this that many times."
 
 ;; Reload from disk
 (global-set-key (kbd "<f5>") 'revert-buffer)
+
+
+;; Silver Searcher - a better version of rgrep
+(global-set-key (kbd "C-<f5>") 'ag)
 
 ;; Lock files makes grunt go nuts
 (setq create-lockfiles nil)
