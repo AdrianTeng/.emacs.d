@@ -30,10 +30,11 @@
 ;; UI related
 ;;------------------------------------------------------------------------------
 
-(add-to-list 'load-path "~/.emacs.d/elpa/darcula-theme-20141211.128")
+;; (add-to-list 'load-path "~/.emacs.d/elpa/darcula-theme-20141211.128")
+;; (load-theme 'darcula)
 
-
-(require 'darcula-theme)
+(add-to-list 'load-path "~/.emacs.d/elpa/tangotango-theme-20141123.1354")
+(load-theme 'tangotango t)
 
 (add-to-list 'default-frame-alist '(font .  "DejaVu Sans Mono-10.5" ))
 (set-frame-font "DejaVu Sans Mono-10.5" nil t)
@@ -163,6 +164,7 @@ With argument, do this that many times."
 
 ;; Open files in same repo
 
+;;TODO: Fix. Does not search all files
 (require 'find-file-in-project)
 
 (global-set-key (kbd "C-S-r") 'find-file-in-project)
@@ -312,3 +314,15 @@ With argument, do this that many times."
 
 (provide 'init)
 ;;; init.el ends here
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes (quote ("c5898bd49bea497d5d356d698f82379c12c7325a3697604a9d1ad7f98c8e6647" default))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
