@@ -16,5 +16,13 @@
 ;; to make kill/delete word delete a sub-word when it sees a camel-case word
 (add-hook 'js2-mode-hook 'subword-mode)
 
+
+;; tern provides superb javascript code analysing
+(add-hook 'js2-mode-hook (lambda () (tern-mode t)))
+(add-hook 'js2-mode-hook
+          (lambda () (local-set-key (kbd "<f3>") 'tern-find-definition)))
+
+(add-to-list 'company-backends 'company-tern)
+
 (provide 'javascript-customisations)
 ;;; javascript-customisations.el ends here
