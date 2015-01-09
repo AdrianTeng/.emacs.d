@@ -123,7 +123,6 @@ With argument, do this that many times."
 ;; is a 'modern IDE' too ;)
 (global-set-key (kbd "C-/") 'comment-or-uncomment-region-or-line)
 
-
 ;;------------------------------------------------------------------------------
 ;; File I/O
 ;;------------------------------------------------------------------------------
@@ -273,6 +272,8 @@ With argument, do this that many times."
 
 (require 'yasnippet)
 (yas-global-mode 1)
+
+(add-hook 'prog-mode-hook 'hungry-delete-mode)
 
 ;;-----------------------------------------------------------------------------
 ;; Program language specifc
