@@ -230,6 +230,9 @@ With argument, do this that many times."
 
 (global-set-key (kbd "M-l") 'goto-line)
 
+;; Have had enough of mistyping C-x o as C-x C-o
+(global-set-key (kbd "C-x C-o") 'other-window)
+
 ;;-----------------------------------------------------------------------------
 ;; Generic Prog mode
 ;;-----------------------------------------------------------------------------
