@@ -11,6 +11,8 @@
 
 
 (add-to-list 'load-path "~/.emacs.d/user-lisp/")
+;; TODO: Will remove once I've move the package to MELPA
+(add-to-list 'load-path "~/.emacs.d/user-lisp/delete-mode")
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
@@ -88,26 +90,6 @@
 ;; Who uses C-z to minimise Emacs anyway?
 (global-set-key (kbd "C-z") 'undo)
 
-;; TODO: make backward-delete-word to delete up to end of previous word
-
-(defun delete-word (arg)
-  "Delete characters forward until encountering the end of a word.
-With argument, do this that many times."
-  (interactive "p")
-  (delete-region (point) (progn (forward-word arg) (point))))
-
-(defun backward-delete-word (arg)
-  "Delete characters backward until encountering the end of a word.
-With argument, do this that many times."
-  (interactive "p")
-  (delete-word (- arg)))
-
-;; If I want stuff to get into kill-ring, I'll mark-region -> kill-region,
-;; rather than using C-delete | C-backspace
-(global-set-key (kbd "<C-delete>") 'delete-word)
-(global-set-key (kbd "<C-backspace>") 'backward-delete-word)
-
-;; TODO: Write subword-delete
 
 (defun comment-or-uncomment-region-or-line ()
     "Comments or uncomments the region or the current line if there's no active region."
@@ -122,6 +104,9 @@ With argument, do this that many times."
 ;; A very common default key-binding in modern IDE. I suppose with this, Emacs
 ;; is a 'modern IDE' too ;)
 (global-set-key (kbd "C-/") 'comment-or-uncomment-region-or-line)
+
+(require 'delete-mode)
+(add-hook 'after-init-hook 'global-delete-mode)
 
 ;;------------------------------------------------------------------------------
 ;; File I/O

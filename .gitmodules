@@ -1,0 +1,3 @@
+[submodule "user-lisp/delete-mode"]
+	path = user-lisp/delete-mode
+	url = https://github.com/AdrianTeng/delete-mode
