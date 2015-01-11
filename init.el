@@ -298,7 +298,7 @@
 
 (if (executable-find "pandoc")
     (setq-default
-     '(markdown-command (executable-find "pandoc"))))
+     markdown-command (executable-find "pandoc")))
 
 
 (provide 'init)
