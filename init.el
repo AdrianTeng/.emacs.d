@@ -288,6 +288,8 @@
 (add-to-list 'company-dabbrev-code-modes 'html-mode)
 ;; less
 (add-to-list 'company-dabbrev-code-modes 'less-css-mode)
+(add-hook 'css-mode-hook 'company-mode)
+(add-hook 'css-mode-hook 'rainbow-mode)
 
 ;; Java
 (add-hook 'java-mode-hook 'subword-mode)
