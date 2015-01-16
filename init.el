@@ -57,6 +57,8 @@
 (require 'ido)
 (ido-mode t)
 
+;; Typing "yes" is too tedious
+(defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; Tracking command usage
 ;;(keyfreq-mode) TODO: FIX
