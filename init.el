@@ -305,6 +305,17 @@
      markdown-command (executable-find "pandoc")))
 
 
+;; Assembly
+(defun compile-and-link-assembly()
+  (interactive)
+    (setq filename (car (last (split-string buffer-file-name "/"))))
+    (shell-command (format "as %s" filename))
+    (shell-command (format "ld %s -o %s" "a.out" (nth 0 (split-string filename "\\."))))
+    (message (format "compiled %s" filename))
+    )
+
+(global-set-key (kbd "<f1>") 'compile-and-link-assembly)
+
 (provide 'init)
 ;;; init.el ends here
 (custom-set-variables
